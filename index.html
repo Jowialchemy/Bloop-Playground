@@ -414,22 +414,25 @@
 
         .shape-options {
             display: flex;
-            gap: 35px;
-            flex-wrap: wrap;
+            gap: 30px;
+            flex-wrap: nowrap;
             justify-content: center;
             padding: 20px;
+            width: 100%;
+            overflow-x: auto;
         }
 
         .shape-piece {
-            width: 130px;
-            height: 130px;
+            width: 110px;
+            height: 110px;
             cursor: grab;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4.5rem;
+            font-size: 4rem;
             transition: transform 0.2s;
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
+            flex-shrink: 0;
         }
 
         .shape-piece:active { cursor: grabbing; transform: scale(1.2); }
@@ -556,9 +559,9 @@
             .game-icon { font-size: 2.2rem; }
             .game-label { font-size: 0.8rem; }
             .color-btn { width: 70px; height: 70px; }
-            .shape-piece { width: 90px; height: 90px; font-size: 3.5rem; }
+            .shape-piece { width: 75px; height: 75px; font-size: 3rem; }
             .shape-target { width: 140px; height: 140px; font-size: 4rem; }
-            .shape-options { gap: 20px; }
+            .shape-options { gap: 15px; flex-wrap: nowrap; }
             .bloop-container {
                 width: 100px;
                 height: 100px;
