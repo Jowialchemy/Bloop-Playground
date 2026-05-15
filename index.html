@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
 <title>Bloop Playground</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 *{
@@ -17,113 +19,84 @@
 
 body{
     font-family:'Fredoka One', cursive;
-    min-height:100vh;
     overflow:hidden;
+    background:linear-gradient(135deg,#FFE5E5,#FFF6D6,#E5FFD9,#D9F1FF);
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:
-    radial-gradient(circle at top left,#ffb6d9 0%,transparent 25%),
-    radial-gradient(circle at bottom right,#b6ffd9 0%,transparent 25%),
-    linear-gradient(135deg,#fff3f7,#fffde9,#f0fff4,#eef7ff);
+    flex-direction:column;
+    text-align:center;
 }
+
+/* ===== HOME ===== */
 
 #homeScreen{
     width:100%;
-    max-width:430px;
+    max-width:500px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    text-align:center;
     padding:20px;
 }
 
-.bloop-container{
-    margin-bottom:20px;
-    animation:bounce 2s infinite;
+/* ===== LOGO ===== */
+
+.logo-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:15px;
 }
 
-.bloop{
-    width:130px;
-    height:130px;
-    border-radius:50%;
-    background:linear-gradient(145deg,#ff88b7,#ff5fa2);
-    position:relative;
-    box-shadow:0 10px 30px rgba(255,105,180,.4);
+.bloop-logo{
+    width:180px;
+    max-width:75%;
+    animation:floatLogo 3s ease-in-out infinite;
+    filter:drop-shadow(0 10px 20px rgba(0,0,0,.2));
 }
 
-.eye{
-    position:absolute;
-    width:24px;
-    height:34px;
-    background:white;
-    border-radius:50%;
-    top:35px;
-}
-
-.eye.left{ left:32px; }
-.eye.right{ right:32px; }
-
-.pupil{
-    width:12px;
-    height:18px;
-    background:#222;
-    border-radius:50%;
-    position:absolute;
-    top:8px;
-    left:6px;
-}
-
-.mouth{
-    position:absolute;
-    width:42px;
-    height:20px;
-    border:4px solid #333;
-    border-top:none;
-    border-radius:0 0 40px 40px;
-    left:50%;
-    bottom:28px;
-    transform:translateX(-50%);
-}
-
-@keyframes bounce{
-    0%,100%{ transform:translateY(0); }
-    50%{ transform:translateY(-10px); }
+@keyframes floatLogo{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
 }
 
 .title{
-    font-size:clamp(2.5rem,8vw,4rem);
-    color:#ff4f9a;
-    margin-bottom:10px;
-    text-shadow:0 4px 10px rgba(255,79,154,.25);
+    font-size:2.2rem;
+    color:#ff5ea8;
+    margin-bottom:8px;
 }
 
 .subtitle{
     color:#666;
-    font-size:1.2rem;
-    margin-bottom:35px;
+    margin-bottom:25px;
+    font-size:1rem;
 }
 
+/* ===== GAME GRID ===== */
+
 .games-grid{
-    width:100%;
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
+    width:100%;
 }
 
 .game-card{
-    aspect-ratio:1;
-    border-radius:28px;
+    border-radius:25px;
+    height:120px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    color:white;
     cursor:pointer;
     transition:.25s;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-    padding:10px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
 }
 
 .game-card:hover{
@@ -131,35 +104,36 @@ body{
 }
 
 .game-icon{
-    font-size:3rem;
-    margin-bottom:10px;
+    font-size:2.5rem;
+    margin-bottom:8px;
 }
 
 .game-label{
-    font-size:1rem;
-    text-align:center;
-    line-height:1.2;
+    color:white;
+    font-size:.9rem;
 }
 
-.bubble-card{
-    background:linear-gradient(145deg,#42c9ff,#1e88ff);
+.bubble{
+    background:linear-gradient(135deg,#72d6ff,#5ab7ff);
 }
 
-.color-card{
-    background:linear-gradient(145deg,#ff9c7f,#ff6f91);
+.color{
+    background:linear-gradient(135deg,#ff8f8f,#ff6cab);
 }
 
-.shape-card{
-    background:linear-gradient(145deg,#88e0a3,#45c97a);
+.shape{
+    background:linear-gradient(135deg,#92e69b,#62d8c3);
 }
+
+/* ===== GAME SCREEN ===== */
 
 .game-screen{
     position:fixed;
     inset:0;
-    background:linear-gradient(135deg,#fff3f7,#eefcff);
     display:none;
     flex-direction:column;
-    align-items:center;
+    background:linear-gradient(135deg,#FFE5E5,#FFF6D6,#E5FFD9,#D9F1FF);
+    z-index:10;
 }
 
 .game-screen.active{
@@ -167,218 +141,210 @@ body{
 }
 
 .game-header{
-    width:100%;
-    max-width:500px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:20px;
+    padding:15px;
 }
 
 .back-btn{
+    width:50px;
+    height:50px;
     border:none;
-    background:white;
-    width:55px;
-    height:55px;
     border-radius:50%;
-    font-size:1.5rem;
+    font-size:1.3rem;
     cursor:pointer;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
 
-.score{
+.score-display{
     background:white;
-    padding:10px 20px;
+    padding:10px 18px;
     border-radius:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
+
+/* ===== BUBBLE GAME ===== */
 
 .bubble-area{
-    flex:1;
-    width:100%;
     position:relative;
+    flex:1;
     overflow:hidden;
 }
 
-.bubble{
+.pop-bubble{
     position:absolute;
     border-radius:50%;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:2rem;
     color:white;
-    animation:floatUp linear forwards;
+    font-size:1.5rem;
     cursor:pointer;
-    box-shadow:inset -5px -5px 15px rgba(0,0,0,.1),
-               inset 5px 5px 15px rgba(255,255,255,.4);
+    animation:floatUp linear forwards;
 }
 
 @keyframes floatUp{
     from{
-        transform:translateY(110vh);
+        transform:translateY(100vh);
     }
     to{
         transform:translateY(-150px);
     }
 }
 
-.color-game-area,
-.shape-game-area{
+/* ===== COLOR GAME ===== */
+
+.color-game-area{
     flex:1;
-    width:100%;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     gap:30px;
-    padding:20px;
 }
 
-.target-display,
-.shape-target{
-    width:170px;
-    height:170px;
-    border-radius:30px;
+.target-display{
+    width:150px;
+    height:150px;
+    border-radius:50%;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:5rem;
-    background:white;
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
+    font-size:3rem;
+    color:white;
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
 }
 
-.color-options,
-.shape-options{
+.color-options{
     display:flex;
-    gap:18px;
+    gap:20px;
     flex-wrap:wrap;
     justify-content:center;
-    max-width:450px;
 }
 
-.color-btn,
-.shape-piece{
-    width:90px;
-    height:90px;
-    border-radius:24px;
+.color-btn{
+    width:85px;
+    height:85px;
+    border-radius:20px;
+    border:5px solid white;
+    cursor:pointer;
+}
+
+/* ===== SHAPE GAME ===== */
+
+.shape-game-area{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+}
+
+.shape-target{
+    width:140px;
+    height:140px;
+    border:5px dashed rgba(0,0,0,.2);
+    border-radius:25px;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:2.4rem;
+    font-size:4rem;
+}
+
+.shape-options{
+    display:flex;
+    gap:20px;
+}
+
+.shape-piece{
+    font-size:4rem;
     cursor:pointer;
-    transition:.2s;
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
 }
 
-.color-btn:hover,
-.shape-piece:hover{
-    transform:scale(1.08);
-}
+/* ===== MOBILE ===== */
 
-.celebration{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-}
+@media(max-width:500px){
 
-.confetti{
-    position:absolute;
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    animation:fall 2s linear forwards;
-}
-
-@keyframes fall{
-    from{
-        transform:translateY(-100px);
-        opacity:1;
-    }
-    to{
-        transform:translateY(100vh) rotate(720deg);
-        opacity:0;
-    }
-}
-
-@media(max-width:430px){
-
-    .games-grid{
-        gap:14px;
-    }
-
-    .game-label{
-        font-size:.9rem;
+    .game-card{
+        height:105px;
     }
 
     .game-icon{
-        font-size:2.5rem;
-    }
-
-    .color-btn,
-    .shape-piece{
-        width:75px;
-        height:75px;
         font-size:2rem;
     }
+
+    .game-label{
+        font-size:.75rem;
+    }
+
+    .shape-piece{
+        font-size:3rem;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- ===== HOME ===== -->
+
 <div id="homeScreen">
 
-    <div class="bloop-container">
-        <div class="bloop">
-            <div class="eye left"><div class="pupil"></div></div>
-            <div class="eye right"><div class="pupil"></div></div>
-            <div class="mouth"></div>
-        </div>
+    <div class="logo-container">
+        <img src="images/bloop-logo.png" class="bloop-logo">
     </div>
 
     <h1 class="title">Bloop Playground</h1>
-    <p class="subtitle">Tap a game to play 🎮</p>
+
+    <p class="subtitle">
+        Tap a game to play!
+    </p>
 
     <div class="games-grid">
 
-        <div class="game-card bubble-card" onclick="startGame('bubble')">
+        <div class="game-card bubble" onclick="startGame('bubble')">
             <div class="game-icon">🫧</div>
             <div class="game-label">Bubble Pop</div>
         </div>
 
-        <div class="game-card color-card" onclick="startGame('color')">
+        <div class="game-card color" onclick="startGame('color')">
             <div class="game-icon">🎨</div>
             <div class="game-label">Color Match</div>
         </div>
 
-        <div class="game-card shape-card" onclick="startGame('shape')">
+        <div class="game-card shape" onclick="startGame('shape')">
             <div class="game-icon">🔷</div>
             <div class="game-label">Shape Sorter</div>
         </div>
 
     </div>
+
 </div>
 
-<!-- Bubble -->
+<!-- ===== BUBBLE GAME ===== -->
+
 <div id="bubbleGame" class="game-screen">
 
     <div class="game-header">
         <button class="back-btn" onclick="goHome()">←</button>
-        <div class="score">⭐ <span id="bubbleScore">0</span></div>
+        <div>🫧 Bubble Pop</div>
+        <div class="score-display">⭐ <span id="bubbleScore">0</span></div>
     </div>
 
     <div class="bubble-area" id="bubbleArea"></div>
 
 </div>
 
-<!-- Color -->
+<!-- ===== COLOR GAME ===== -->
+
 <div id="colorGame" class="game-screen">
 
     <div class="game-header">
         <button class="back-btn" onclick="goHome()">←</button>
-        <div class="score">⭐ <span id="colorScore">0</span></div>
+        <div>🎨 Color Match</div>
+        <div class="score-display">⭐ <span id="colorScore">0</span></div>
     </div>
 
     <div class="color-game-area">
@@ -388,14 +354,17 @@ body{
         <div class="color-options" id="colorOptions"></div>
 
     </div>
+
 </div>
 
-<!-- Shape -->
+<!-- ===== SHAPE GAME ===== -->
+
 <div id="shapeGame" class="game-screen">
 
     <div class="game-header">
         <button class="back-btn" onclick="goHome()">←</button>
-        <div class="score">⭐ <span id="shapeScore">0</span></div>
+        <div>🔷 Shape Sorter</div>
+        <div class="score-display">⭐ <span id="shapeScore">0</span></div>
     </div>
 
     <div class="shape-game-area">
@@ -405,13 +374,12 @@ body{
         <div class="shape-options" id="shapeOptions"></div>
 
     </div>
-</div>
 
-<div class="celebration" id="celebration"></div>
+</div>
 
 <script>
 
-/* ================= MUSIC ================= */
+/* ===== MUSIC ===== */
 
 const musicTracks = [
     "assets/music/come-and-join.mp3",
@@ -423,9 +391,10 @@ const musicTracks = [
 let currentTrack = 0;
 
 const bgMusic = new Audio();
-bgMusic.volume = 0.25;
 
-bgMusic.addEventListener('ended', () => {
+bgMusic.volume = 0.3;
+
+bgMusic.addEventListener("ended",()=>{
 
     currentTrack++;
 
@@ -434,406 +403,301 @@ bgMusic.addEventListener('ended', () => {
     }
 
     bgMusic.src = musicTracks[currentTrack];
+
     bgMusic.play();
+
 });
 
 function startMusic(){
 
     bgMusic.src = musicTracks[currentTrack];
 
-    bgMusic.play().catch(() => {});
+    bgMusic.play().catch(()=>{});
+
 }
 
-/* ================= VOICE ================= */
+document.body.addEventListener("click",startMusic,{once:true});
+
+/* ===== VOICE ===== */
 
 function speak(text){
 
     const speech = new SpeechSynthesisUtterance(text);
 
-    speech.rate = 0.9;
     speech.pitch = 1.2;
+    speech.rate = .95;
     speech.volume = 1;
 
     speechSynthesis.speak(speech);
+
 }
 
-/* ================= GAME ================= */
+/* ===== GAME ===== */
 
-let currentGame = null;
-
-const scores = {
+let scores = {
     bubble:0,
     color:0,
     shape:0
 };
 
+let bubbleInterval;
+
+/* ===== NAV ===== */
+
 function startGame(game){
 
-    currentGame = game;
+    document.querySelectorAll(".game-screen").forEach(s=>{
+        s.classList.remove("active");
+    });
 
-    startMusic();
+    document.getElementById(game + "Game").classList.add("active");
 
-    document.querySelectorAll('.game-screen')
-    .forEach(screen => screen.classList.remove('active'));
+    if(game === "bubble"){
+        startBubbleGame();
+    }
 
-    document.getElementById(game + 'Game')
-    .classList.add('active');
+    if(game === "color"){
+        startColorGame();
+    }
 
-    if(game === 'bubble') startBubbleGame();
-    if(game === 'color') startColorGame();
-    if(game === 'shape') startShapeGame();
+    if(game === "shape"){
+        startShapeGame();
+    }
+
 }
 
 function goHome(){
 
+    document.querySelectorAll(".game-screen").forEach(s=>{
+        s.classList.remove("active");
+    });
+
     clearInterval(bubbleInterval);
 
-    document.querySelectorAll('.game-screen')
-    .forEach(screen => screen.classList.remove('active'));
 }
 
-/* ================= BUBBLE ================= */
-
-let bubbleInterval;
+/* ===== BUBBLE ===== */
 
 function startBubbleGame(){
 
-    const area = document.getElementById('bubbleArea');
+    const area = document.getElementById("bubbleArea");
 
-    area.innerHTML = '';
+    area.innerHTML = "";
 
     scores.bubble = 0;
 
-    updateScore('bubble');
+    updateScore("bubble");
 
-    clearInterval(bubbleInterval);
+    bubbleInterval = setInterval(()=>{
 
-    const colors = [
-        '#ff5fa2',
-        '#1e88ff',
-        '#ffb347',
-        '#55dd88',
-        '#aa77ff'
-    ];
+        const bubble = document.createElement("div");
 
-    const emojis = ['🫧','⭐','🌈','🍭','🦋'];
+        bubble.className = "pop-bubble";
 
-    bubbleInterval = setInterval(() => {
+        const size = Math.random()*50 + 60;
 
-        const bubble = document.createElement('div');
-
-        bubble.className = 'bubble';
-
-        const size = Math.random() * 50 + 60;
-
-        bubble.style.width = size + 'px';
-        bubble.style.height = size + 'px';
+        bubble.style.width = size + "px";
+        bubble.style.height = size + "px";
 
         bubble.style.left =
-        Math.random() * (window.innerWidth - size) + 'px';
+            Math.random() * (window.innerWidth - size) + "px";
 
         bubble.style.background =
-        colors[Math.floor(Math.random()*colors.length)];
+            `hsl(${Math.random()*360},80%,70%)`;
 
         bubble.style.animationDuration =
-        (Math.random()*2 + 4) + 's';
+            (Math.random()*3 + 4) + "s";
 
-        bubble.textContent =
-        emojis[Math.floor(Math.random()*emojis.length)];
+        bubble.innerHTML = "⭐";
 
-        bubble.addEventListener('click', () => {
-
-            playTone(700);
-
-            speak("Yay!");
-
-            scores.bubble++;
-
-            updateScore('bubble');
+        bubble.onclick = ()=>{
 
             bubble.remove();
 
+            scores.bubble++;
+
+            updateScore("bubble");
+
             if(scores.bubble % 5 === 0){
-
-                celebrate();
-
-                speak("Awesome!");
+                speak("Great job");
             }
-        });
+
+        };
 
         area.appendChild(bubble);
 
-        setTimeout(() => bubble.remove(),7000);
+        setTimeout(()=>{
+            bubble.remove();
+        },7000);
 
-    },900);
+    },1000);
+
 }
 
-/* ================= COLOR ================= */
+/* ===== COLOR ===== */
 
 const colorData = [
 
 {
-    name:'red',
-    hex:'#ff3b30',
-    emoji:'🔴'
+    name:"red",
+    hex:"#ff3b30",
+    emoji:"🔴"
 },
 
 {
-    name:'blue',
-    hex:'#0066ff',
-    emoji:'🔵'
+    name:"blue",
+    hex:"#007aff",
+    emoji:"🔵"
 },
 
 {
-    name:'green',
-    hex:'#00c853',
-    emoji:'🟢'
+    name:"green",
+    hex:"#34c759",
+    emoji:"🟢"
 },
 
 {
-    name:'yellow',
-    hex:'#ffd600',
-    emoji:'🟡'
-},
-
-{
-    name:'purple',
-    hex:'#9c27b0',
-    emoji:'🟣'
-},
-
-{
-    name:'orange',
-    hex:'#ff6d00',
-    emoji:'🟠'
+    name:"yellow",
+    hex:"#ffd60a",
+    emoji:"🟡"
 }
 
 ];
 
-let currentTargetColor = null;
+let currentColor;
 
 function startColorGame(){
 
     scores.color = 0;
 
-    updateScore('color');
+    updateScore("color");
 
-    nextColorRound();
+    nextColor();
+
 }
 
-function nextColorRound(){
+function nextColor(){
 
     const target =
-    colorData[Math.floor(Math.random()*colorData.length)];
+        colorData[Math.floor(Math.random()*colorData.length)];
 
-    currentTargetColor = target;
+    currentColor = target;
 
-    const display =
-    document.getElementById('targetDisplay');
+    const display = document.getElementById("targetDisplay");
 
     display.style.background = target.hex;
 
-    display.textContent = target.emoji;
+    display.innerHTML = target.emoji;
 
-    const options =
-    document.getElementById('colorOptions');
+    const options = document.getElementById("colorOptions");
 
-    options.innerHTML = '';
+    options.innerHTML = "";
 
-    const shuffled =
-    [...colorData]
-    .sort(() => Math.random()-0.5)
-    .slice(0,4);
+    colorData.forEach(color=>{
 
-    if(!shuffled.includes(target)){
+        const btn = document.createElement("div");
 
-        shuffled[Math.floor(Math.random()*4)] = target;
-    }
-
-    shuffled.forEach(color => {
-
-        const btn = document.createElement('div');
-
-        btn.className = 'color-btn';
+        btn.className = "color-btn";
 
         btn.style.background = color.hex;
 
-        btn.textContent = color.emoji;
+        btn.innerHTML = color.emoji;
 
-        btn.onclick = () => {
+        btn.onclick = ()=>{
 
-            if(color.name === currentTargetColor.name){
-
-                playTone(900);
-
-                speak("Great job!");
+            if(color.name === currentColor.name){
 
                 scores.color++;
 
-                updateScore('color');
+                updateScore("color");
 
-                celebrate();
+                speak("Awesome");
 
-                setTimeout(nextColorRound,700);
+                nextColor();
 
             }else{
 
-                playTone(200);
+                speak("Try again");
 
-                speak("Try again!");
             }
+
         };
 
         options.appendChild(btn);
+
     });
+
 }
 
-/* ================= SHAPES ================= */
+/* ===== SHAPE ===== */
 
-const shapeData = [
+const shapes = ["⭐","❤️","🔷","🔺"];
 
-{ name:'circle', emoji:'⭕' },
-{ name:'square', emoji:'⬜' },
-{ name:'triangle', emoji:'🔺' },
-{ name:'diamond', emoji:'🔷' },
-{ name:'heart', emoji:'❤️' },
-{ name:'star', emoji:'⭐' }
-
-];
-
-let currentTargetShape = null;
+let currentShape;
 
 function startShapeGame(){
 
     scores.shape = 0;
 
-    updateScore('shape');
+    updateScore("shape");
 
-    nextShapeRound();
+    nextShape();
+
 }
 
-function nextShapeRound(){
+function nextShape(){
 
-    const target =
-    shapeData[Math.floor(Math.random()*shapeData.length)];
+    currentShape =
+        shapes[Math.floor(Math.random()*shapes.length)];
 
-    currentTargetShape = target;
+    document.getElementById("shapeTarget").innerHTML =
+        currentShape;
 
-    document.getElementById('shapeTarget')
-    .textContent = target.emoji;
+    const options = document.getElementById("shapeOptions");
 
-    const options =
-    document.getElementById('shapeOptions');
+    options.innerHTML = "";
 
-    options.innerHTML = '';
+    shapes.forEach(shape=>{
 
-    const shuffled =
-    [...shapeData]
-    .sort(() => Math.random()-0.5)
-    .slice(0,4);
+        const piece = document.createElement("div");
 
-    if(!shuffled.includes(target)){
+        piece.className = "shape-piece";
 
-        shuffled[Math.floor(Math.random()*4)] = target;
-    }
+        piece.innerHTML = shape;
 
-    shuffled.forEach(shape => {
+        piece.onclick = ()=>{
 
-        const piece = document.createElement('div');
-
-        piece.className = 'shape-piece';
-
-        piece.textContent = shape.emoji;
-
-        piece.style.background = 'white';
-
-        piece.onclick = () => {
-
-            if(shape.name === currentTargetShape.name){
-
-                playTone(800);
-
-                speak("Awesome!");
+            if(shape === currentShape){
 
                 scores.shape++;
 
-                updateScore('shape');
+                updateScore("shape");
 
-                celebrate();
+                speak("Great job");
 
-                setTimeout(nextShapeRound,700);
+                nextShape();
 
             }else{
 
-                playTone(180);
+                speak("Try again");
 
-                speak("Try again!");
             }
+
         };
 
         options.appendChild(piece);
+
     });
+
 }
 
-/* ================= SCORE ================= */
+/* ===== SCORE ===== */
 
 function updateScore(game){
 
-    document.getElementById(game + 'Score')
-    .textContent = scores[game];
-}
+    document.getElementById(game + "Score").innerHTML =
+        scores[game];
 
-/* ================= SOUND ================= */
-
-const AudioContextClass =
-window.AudioContext || window.webkitAudioContext;
-
-const audioCtx = new AudioContextClass();
-
-function playTone(freq){
-
-    const osc = audioCtx.createOscillator();
-
-    const gain = audioCtx.createGain();
-
-    osc.connect(gain);
-
-    gain.connect(audioCtx.destination);
-
-    osc.frequency.value = freq;
-
-    gain.gain.value = 0.1;
-
-    osc.start();
-
-    osc.stop(audioCtx.currentTime + 0.15);
-}
-
-/* ================= CELEBRATE ================= */
-
-function celebrate(){
-
-    const celebration =
-    document.getElementById('celebration');
-
-    for(let i=0;i<20;i++){
-
-        const confetti =
-        document.createElement('div');
-
-        confetti.className = 'confetti';
-
-        confetti.style.left =
-        Math.random()*100 + '%';
-
-        confetti.style.background =
-        ['#ff4f9a','#00c853','#0066ff','#ffd600','#ff6d00']
-        [Math.floor(Math.random()*5)];
-
-        celebration.appendChild(confetti);
-
-        setTimeout(() => confetti.remove(),2000);
-    }
 }
 
 </script>
