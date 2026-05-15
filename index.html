@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <title>Bloop Playground</title>
 
 <style>
@@ -31,6 +31,7 @@ body{
 }
 
 /* HOME SCREEN */
+
 #homeScreen{
     width:100%;
     max-width:430px;
@@ -45,53 +46,63 @@ body{
 }
 
 /* LOGO */
+
 .logo-container{
-    margin-top:-90px;
-    margin-bottom:10px;
+    margin-top:-130px;
+    margin-bottom:25px;
     animation:floatLogo 3s ease-in-out infinite;
 }
 
 .logo-container img{
-    width:165px;
-    max-width:90%;
-    filter:drop-shadow(0 0 18px rgba(255,255,255,0.25));
+    width:290px;
+    max-width:95%;
+    filter:
+        drop-shadow(0 0 12px rgba(255,255,255,0.2))
+        drop-shadow(0 0 30px rgba(255,105,180,0.18));
 }
 
 @keyframes floatLogo{
-    0%,100%{ transform:translateY(0px); }
-    50%{ transform:translateY(-8px); }
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-8px);
+    }
 }
 
 /* TITLE */
+
 .title{
-    font-size:clamp(2.5rem,8vw,4rem);
+    font-size:clamp(3.2rem,9vw,5rem);
     color:#ff5ea8;
     text-shadow:
         0 0 10px rgba(255,94,168,0.5),
         0 0 25px rgba(255,94,168,0.4);
-    margin-top:-5px;
 }
 
 .subtitle{
-    font-size:1.1rem;
+    font-size:1.3rem;
     color:#ddd;
-    margin-top:8px;
-    margin-bottom:40px;
+    margin-top:12px;
+    margin-bottom:55px;
 }
 
-/* GAME GRID */
+/* GAMES GRID */
+
 .games-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:18px;
+    gap:22px;
     width:100%;
-    max-width:390px;
-    margin-top:-5px;
+    max-width:420px;
+    margin-top:10px;
 }
 
 /* GAME CARDS */
+
 .game-card{
     aspect-ratio:1;
+    min-height:155px;
     border-radius:28px;
     display:flex;
     flex-direction:column;
@@ -125,20 +136,21 @@ body{
 }
 
 .game-icon{
-    font-size:3rem;
-    margin-bottom:10px;
+    font-size:3.3rem;
+    margin-bottom:12px;
 }
 
 .game-label{
-    font-size:0.8rem;
+    font-size:0.95rem;
     color:white;
     text-align:center;
-    line-height:1.1;
+    line-height:1.2;
     width:100%;
     padding:0 6px;
 }
 
 /* GAME SCREEN */
+
 .game-screen{
     position:fixed;
     inset:0;
@@ -158,6 +170,7 @@ body{
 }
 
 /* HEADER */
+
 .game-header{
     position:absolute;
     top:15px;
@@ -193,6 +206,7 @@ body{
 }
 
 /* BUBBLE GAME */
+
 .bubble-area{
     width:100%;
     height:100%;
@@ -224,6 +238,7 @@ body{
 }
 
 /* COLOR GAME */
+
 .color-game-area{
     display:flex;
     flex-direction:column;
@@ -269,6 +284,7 @@ body{
 }
 
 /* SHAPE GAME */
+
 .shape-game-area{
     display:flex;
     flex-direction:column;
@@ -304,45 +320,53 @@ body{
 }
 
 /* MOBILE */
+
 @media(max-width:420px){
 
     .logo-container{
-        margin-top:-80px;
+        margin-top:-110px;
     }
 
     .logo-container img{
-        width:155px;
+        width:270px;
     }
 
     .title{
-        font-size:3rem;
+        font-size:3.4rem;
     }
 
     .games-grid{
-        gap:14px;
+        gap:16px;
+    }
+
+    .game-card{
+        min-height:135px;
     }
 
     .game-label{
-        font-size:0.7rem;
+        font-size:0.85rem;
     }
 
     .game-icon{
-        font-size:2.5rem;
+        font-size:2.9rem;
     }
 }
+
 </style>
 </head>
 
 <body>
 
 <!-- HOME -->
+
 <div id="homeScreen">
 
     <div class="logo-container">
-        <img src="images/bloop-logo.png" alt="Bloop Logo">
+        <img src="images/bloop-logo.png" alt="Bloop Playground Logo">
     </div>
 
     <h1 class="title">Bloop Playground</h1>
+
     <p class="subtitle">Tap a game to play!</p>
 
     <div class="games-grid">
@@ -363,9 +387,11 @@ body{
         </div>
 
     </div>
+
 </div>
 
 <!-- BUBBLE GAME -->
+
 <div id="bubbleGame" class="game-screen">
 
     <div class="game-header">
@@ -379,6 +405,7 @@ body{
 </div>
 
 <!-- COLOR GAME -->
+
 <div id="colorGame" class="game-screen">
 
     <div class="game-header">
@@ -398,6 +425,7 @@ body{
 </div>
 
 <!-- SHAPE GAME -->
+
 <div id="shapeGame" class="game-screen">
 
     <div class="game-header">
@@ -469,7 +497,7 @@ function initAudio(){
     }
 }
 
-/* VOICE FEEDBACK */
+/* VOICE */
 
 function speak(text){
 
@@ -482,7 +510,7 @@ function speak(text){
     window.speechSynthesis.speak(speech);
 }
 
-/* SOUND EFFECTS */
+/* SOUND FX */
 
 function playSound(type){
 
@@ -582,7 +610,7 @@ function startGame(game){
     }
 }
 
-/* GO HOME */
+/* HOME */
 
 function goHome(){
 
@@ -593,7 +621,7 @@ function goHome(){
     });
 }
 
-/* UPDATE SCORE */
+/* SCORE */
 
 function updateScore(game){
 
@@ -601,7 +629,7 @@ function updateScore(game){
 
 }
 
-/* BUBBLE GAME */
+/* BUBBLE */
 
 function startBubbleGame(){
 
@@ -664,7 +692,6 @@ function startBubbleGame(){
             }else{
 
                 speak("Great job!");
-
             }
         };
 
@@ -679,7 +706,7 @@ function startBubbleGame(){
     },1000);
 }
 
-/* COLOR GAME */
+/* COLOR */
 
 const colorData = [
 
@@ -781,11 +808,10 @@ function checkColor(color){
         playSound('wrong');
 
         speak("Try again!");
-
     }
 }
 
-/* SHAPE GAME */
+/* SHAPE */
 
 const shapeData = [
 
@@ -878,7 +904,6 @@ function checkShape(shape){
         playSound('wrong');
 
         speak("Try again!");
-
     }
 }
 
